@@ -35,4 +35,13 @@ public class JDBCUtils {
             rs.close();
         }
     }
+
+    public static void closeResource(Connection conn, PreparedStatement ps) throws SQLException {
+        if (ps != null){
+            ps.close();
+        }
+        if (conn != null) {
+            conn.close();
+        }
+    }
 }

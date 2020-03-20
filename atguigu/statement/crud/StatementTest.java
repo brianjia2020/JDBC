@@ -17,7 +17,7 @@ public class StatementTest {
         String password = scanner.next();
 
         String sql = "select user,password from test.user where user= '" + user + "' and password= '" + password + "';";
-
+        
     }
 
 }
