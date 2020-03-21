@@ -76,6 +76,4 @@ public class PreparedStatementUpdateTest {
         ps.execute();
         JDBCUtils.closeResource(conn,ps,null);
     }
-
-
 }
