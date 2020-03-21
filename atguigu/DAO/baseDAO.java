@@ -11,8 +11,7 @@ import java.util.List;
 /*
  * encapsulate the common CRUD operation
  */
-public class baseDAO {
-
+public abstract class baseDAO {
 
     public static <T> List<T> getforList(Connection conn, Class<T> clazz, String sql, Object...args) throws SQLException {
         conn = null;
@@ -85,6 +84,32 @@ public class baseDAO {
             JDBCUtils.closeResource(null,ps,rs);
         }
         return null;
+    }
+
+    //get some generic special value, like count(*),date
+    public static <E>E getValue(Connection conn, String sql, Object...args){
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(sql);
+            for(int i =0; i < args.length; i++){
+                ps.setObject(i+1,args[i]);
+            }
+
+            rs = ps.executeQuery();
+            if (rs.next()){
+                return (E) rs.getObject(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try{
+                JDBCUtils.closeResource(null,ps,rs);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return  null;
     }
 
     public static int update(Connection conn, String sql, Object...args){
