@@ -1,6 +1,7 @@
 package com.atguigu.utility;
 
 import com.atguigu.connection.ConnectionTest;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,5 +44,12 @@ public class JDBCUtils {
         if (conn != null) {
             conn.close();
         }
+    }
+
+    private static ComboPooledDataSource cpds = new ComboPooledDataSource("helloc3p0");
+    public static Connection getConnectionbyC3P0 () throws SQLException{
+        Connection conn = cpds.getConnection();
+        System.out.println(conn);
+        return conn;
     }
 }

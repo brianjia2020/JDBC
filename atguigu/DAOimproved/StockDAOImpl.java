@@ -20,7 +20,7 @@ public class StockDAOImpl extends baseDAO<Stock> implements StockDAO {
         StockDAOImpl stockDAO = new StockDAOImpl();
         Connection conn =null;
         try {
-            conn = JDBCUtils.getConnection();
+            conn = JDBCUtils.getConnectionbyC3P0();
             Stock new_stock = new Stock(30,"CHUN","CHUNYANG INC.","canada","CAD","Canada","5 Gilmour Drive,Ajax,ON","Technology");
             //stockDAO.insert(conn,new_stock);
             System.out.println("Insert successfully.");
@@ -39,7 +39,7 @@ public class StockDAOImpl extends baseDAO<Stock> implements StockDAO {
             System.out.println("The count of the table stock_list is: " + count);
             System.out.println("All the technology companies are here.");
             stockDAO.getBySector(conn,"Technology").forEach(System.out::println);
-        } catch (IOException | SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             try {
