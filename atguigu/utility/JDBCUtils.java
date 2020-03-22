@@ -1,8 +1,11 @@
 package com.atguigu.utility;
 
+import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.atguigu.connection.ConnectionTest;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
@@ -10,6 +13,9 @@ import java.util.Properties;
 
 //a group of utility for
 public class JDBCUtils {
+    public static void main(String[] args) throws Exception {
+        System.out.println(getConnectionByDruid());
+    }
     public static Connection getConnection() throws SQLException, IOException, ClassNotFoundException {
         InputStream is = ConnectionTest.class.getClassLoader().getResourceAsStream("com/atguigu/jdbc.properties");
         Properties properties = new Properties();
@@ -47,9 +53,29 @@ public class JDBCUtils {
     }
 
     private static ComboPooledDataSource cpds = new ComboPooledDataSource("helloc3p0");
+
     public static Connection getConnectionbyC3P0 () throws SQLException{
         Connection conn = cpds.getConnection();
         System.out.println(conn);
         return conn;
     }
-}
+
+
+    private static DataSource source1;
+    static {
+        try {
+            Properties pros = new Properties();
+            InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("druid.properties");
+            pros.load(is);
+            source1 = DruidDataSourceFactory.createDataSource(pros);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Connection getConnectionByDruid() throws Exception{
+        Connection connection = source1.getConnection();
+        return connection;
+    }
+
+    }
