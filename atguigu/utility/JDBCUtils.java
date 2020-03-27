@@ -4,6 +4,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.atguigu.connection.ConnectionTest;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import org.apache.commons.dbutils.DbUtils;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -43,13 +44,29 @@ public class JDBCUtils {
         }
     }
 
-    public static void closeResource(Connection conn, PreparedStatement ps) throws SQLException {
-        if (ps != null){
-            ps.close();
+    public static void closeResource(Connection conn, PreparedStatement ps) {
+
+        try {
+            if (ps != null) {
+                ps.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
         }
-        if (conn != null) {
-            conn.close();
-        }
+
+    }
+
+    /*
+     * using dbutils.jar
+     */
+    public static void closeResourcebyCommons(Connection conn, Statement ps, ResultSet rs){
+        DbUtils.closeQuietly(conn);
+        DbUtils.closeQuietly(ps);
+        DbUtils.closeQuietly(rs);
     }
 
     private static ComboPooledDataSource cpds = new ComboPooledDataSource("helloc3p0");

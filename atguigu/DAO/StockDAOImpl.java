@@ -39,11 +39,7 @@ public class StockDAOImpl extends baseDAO implements StockDAO{
         } catch (IOException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
-            try {
-                JDBCUtils.closeResource(conn, null);
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
+            JDBCUtils.closeResource(conn, null);
         }
     }
     @Override

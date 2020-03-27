@@ -125,11 +125,7 @@ public abstract class baseDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                JDBCUtils.closeResource(null, ps);
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
+            JDBCUtils.closeResource(null, ps);
         }
 
         return 0;

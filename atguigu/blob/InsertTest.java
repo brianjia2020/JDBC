@@ -37,11 +37,7 @@ public class InsertTest {
         } catch (IOException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        try {
-            JDBCUtils.closeResource(conn, ps);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        JDBCUtils.closeResource(conn, ps);
 
     }
     //1. addBatch() 2. executeBatch() 3.clearBatch()
@@ -70,11 +66,7 @@ public class InsertTest {
         } catch (IOException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        try {
-            JDBCUtils.closeResource(conn, ps);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        JDBCUtils.closeResource(conn, ps);
 
     }
 
@@ -104,11 +96,7 @@ public class InsertTest {
         } catch (IOException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        try {
-            JDBCUtils.closeResource(conn, ps);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        JDBCUtils.closeResource(conn, ps);
 
     }
 

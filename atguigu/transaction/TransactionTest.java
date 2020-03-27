@@ -114,11 +114,7 @@ public class TransactionTest {
         } catch (IOException | SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
-            try {
-                JDBCUtils.closeResource(conn, ps);
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
+            JDBCUtils.closeResource(conn, ps);
         }
 
         return 0;
@@ -140,11 +136,7 @@ public class TransactionTest {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                JDBCUtils.closeResource(null, ps);
-            } catch (SQLException e){
-                e.printStackTrace();
-            }
+            JDBCUtils.closeResource(null, ps);
         }
 
         return 0;
